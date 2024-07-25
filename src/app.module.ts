@@ -1,14 +1,14 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import DiscordRequestVerifier from './middleware/discord-request-verifier';
+import { BotController } from './controllers/bot.controller';
 import { ConfigModule } from '@nestjs/config';
 import { verifyKeyMiddleware } from 'discord-interactions';
+import { BotService } from './services/bot.service';
+import GeminiService from './services/gemini.service';
 
 @Module({
   imports: [ConfigModule.forRoot()],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [BotController],
+  providers: [GeminiService, BotService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
